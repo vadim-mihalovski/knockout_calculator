@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.2.3.2.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+</head>
+<body>
+    <!-- This is a *view* - HTML markup that defines the appearance of your UI -->
+    <div class="well">
+
+        <div class="alert alert-danger" role="alert" data-bind="visible: !lastInputWasValid()">
+            Вы ввели некорректные данные, пожалуйста исправьте поля, отмеченные красным цветом.
+        </div>
+
+        <!--<p>First name: <strong data-bind="text: firstName"></strong></p>
+        <p>Last name: <strong data-bind="text: lastName"></strong></p>-->
+
+        <form class="form-inline" data-bind="css: {'has-error' : !lastInputWasValid()} ">
+            <div class="form-group">
+                <label for="firstName">First name:</label>
+                <input type="text" class="form-control" id="firstName" data-bind="textInput: firstName" placeholder="First name">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="lastName">Last name:</label>
+                <input type="text" class="form-control" id="lastName" data-bind="textInput: lastName" placeholder="Last name">
+            </div>
+        </form>
+
+    </div>
+
+    <script type="text/javascript" src="../public/js/script-loader.js"></script>
+</body>
+</html>
