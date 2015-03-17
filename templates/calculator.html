@@ -14,19 +14,52 @@
             Вы ввели некорректные данные, пожалуйста исправьте поля, отмеченные красным цветом.
         </div>
 
-        <!--<p>First name: <strong data-bind="text: firstName"></strong></p>
-        <p>Last name: <strong data-bind="text: lastName"></strong></p>-->
-
         <form class="form-inline" data-bind="css: {'has-error' : !lastInputWasValid()} ">
             <div class="form-group">
-                <label for="firstName">First name:</label>
-                <input type="text" class="form-control" id="firstName" data-bind="textInput: firstName" placeholder="First name">
+                <label for="leukocytes">Лейкоциты:</label>
+                <input type="text" class="form-control" id="leukocytes" data-bind="textInput: leukocytes">
+            </div>
+        </form>
+        <form class="form-inline" data-bind="css: {'has-error' : !lastInputWasValid()} ">
+            <div class="form-group">
+                <label for="youngNeutrophils">Нейтрофилы юные:</label>
+                <input type="text" class="form-control" id="youngNeutrophils" data-bind="textInput: youngNeutrophils">
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
-                <label for="lastName">Last name:</label>
-                <input type="text" class="form-control" id="lastName" data-bind="textInput: lastName" placeholder="Last name">
+                <label for="stabNeutrophils">Нейтрофилы палочкоядерные:</label>
+                <input type="text" class="form-control" id="stabNeutrophils" data-bind="textInput: stabNeutrophils">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="segmentedNeutrophils">Нейтрофилы сегментоядерные:</label>
+                <input type="text" class="form-control" id="segmentedNeutrophils" data-bind="textInput: segmentedNeutrophils">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="monocytes">Моноциты:</label>
+                <input type="text" class="form-control" id="monocytes" data-bind="textInput: monocytes">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="lymphocytes">Лимфоциты:</label>
+                <input type="text" class="form-control" id="lymphocytes" data-bind="textInput: lymphocytes">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="eosinophils">Эозинофилы:</label>
+                <input type="text" class="form-control" id="eosinophils" data-bind="textInput: eosinophils">
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="esr">СОЭ:</label>
+                <input type="text" class="form-control" id="esr" data-bind="textInput: esr">
             </div>
         </form>
 
