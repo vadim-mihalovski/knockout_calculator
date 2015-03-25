@@ -7,61 +7,71 @@
     <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
 </head>
 <body>
-    <!-- This is a *view* - HTML markup that defines the appearance of your UI -->
     <div class="well">
 
         <div class="alert alert-danger" role="alert" data-bind="visible: !lastInputWasValid()">
             Вы ввели некорректные данные, пожалуйста исправьте поля, отмеченные красным цветом.
         </div>
 
-        <form class="form-inline" data-bind="css: {'has-error' : !lastInputWasValid()} ">
+        <form class="form-inline">
             <div class="form-group">
                 <label for="leukocytes">Лейкоциты:</label>
-                <input type="text" class="form-control" id="leukocytes" data-bind="textInput: leukocytes">
+                <input type="text" class="form-control" id="leukocytes" 
+                       data-bind="value: leukocytes, valueUpdate: 'input', event: {keyup: validateAndChooseKLeukocytes}"/>
             </div>
         </form>
-        <form class="form-inline" data-bind="css: {'has-error' : !lastInputWasValid()} ">
+        <form class="form-inline">
             <div class="form-group">
                 <label for="youngNeutrophils">Нейтрофилы юные:</label>
-                <input type="text" class="form-control" id="youngNeutrophils" data-bind="textInput: youngNeutrophils">
+                <input type="text" class="form-control" id="youngNeutrophils" 
+                       data-bind="value: youngNeutrophils, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="stabNeutrophils">Нейтрофилы палочкоядерные:</label>
-                <input type="text" class="form-control" id="stabNeutrophils" data-bind="textInput: stabNeutrophils">
+                <input type="text" class="form-control" id="stabNeutrophils" 
+                       data-bind="value: stabNeutrophils, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="segmentedNeutrophils">Нейтрофилы сегментоядерные:</label>
-                <input type="text" class="form-control" id="segmentedNeutrophils" data-bind="textInput: segmentedNeutrophils">
+                <input type="text" class="form-control" id="segmentedNeutrophils" 
+                       data-bind="value: segmentedNeutrophils, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="monocytes">Моноциты:</label>
-                <input type="text" class="form-control" id="monocytes" data-bind="textInput: monocytes">
+                <input type="text" class="form-control" id="monocytes" 
+                       data-bind="value: monocytes, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="lymphocytes">Лимфоциты:</label>
-                <input type="text" class="form-control" id="lymphocytes" data-bind="textInput: lymphocytes">
+                <input type="text" class="form-control" id="lymphocytes" 
+                       data-bind="value: lymphocytes, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="eosinophils">Эозинофилы:</label>
-                <input type="text" class="form-control" id="eosinophils" data-bind="textInput: eosinophils">
+                <input type="text" class="form-control" id="eosinophils" 
+                       data-bind="value: eosinophils, valueUpdate: 'input', event: {keyup: validate}"/>
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="esr">СОЭ:</label>
-                <input type="text" class="form-control" id="esr" data-bind="textInput: esr">
+                <input type="text" class="form-control" id="esr" 
+                       data-bind="value: esr, valueUpdate: 'input', event: {keyup: validateAndChooseKEsr}"/>
             </div>
         </form>
+
+        <span data-bind="text: kLeukocytes"></span>
+        <span data-bind="text: kEsr"></span>
 
     </div>
 
