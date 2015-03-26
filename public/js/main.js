@@ -2,18 +2,20 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
                       segmentedNeutrophils, monocytes, lymphocytes, eosinophils, esr) {
     var self = this;
 
-    self.leukocytes = ko.observable(leukocytes);
-    self.youngNeutrophils = ko.observable(youngNeutrophils);
-    self.stabNeutrophils = ko.observable(stabNeutrophils);
-    self.segmentedNeutrophils = ko.observable(segmentedNeutrophils);
-    self.monocytes = ko.observable(monocytes);
-    self.lymphocytes = ko.observable(lymphocytes);
-    self.eosinophils = ko.observable(eosinophils);
-    self.esr = ko.observable(esr);
+    self.leukocytes = ko.observable();
+    self.youngNeutrophils = ko.observable();
+    self.stabNeutrophils = ko.observable();
+    self.segmentedNeutrophils = ko.observable();
+    self.monocytes = ko.observable();
+    self.lymphocytes = ko.observable();
+    self.eosinophils = ko.observable();
+    self.esr = ko.observable();
     self.lastInputWasValid = ko.observable(true);
     self.qwe = ko.observable(0);
     self.kLeukocytes = ko.observable(0);
     self.kEsr = ko.observable(0);
+    self.lii  = ko.observable(0);
+    self.gpi = ko.observable(0);
 
     var index = 0;
 
@@ -27,16 +29,20 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
             index--;
             self.lastInputWasValid(true);
             event.target.parentNode.classList.remove('has-error');
+            calculateLii();
+            calculateGpi();
         }
-        console.log(event.target.value);
     };
 
     self.validateAndChooseKLeukocytes = function(data, event) {
         var currentValue = event.target.value;
         var kLeukocytes = 0;
         if(isNaN(currentValue)){
-
+            self.lastInputWasValid(false);
+            event.target.parentNode.classList.add('has-error');
         } else {
+            self.lastInputWasValid(true);
+            event.target.parentNode.classList.remove('has-error');
             if(currentValue >= 1 && currentValue <= 2) {
                 kLeukocytes = 0.2;
             } else if(currentValue >= 2.1 && currentValue <= 3) {
@@ -89,17 +95,25 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
                 kLeukocytes = 3.8;
             } else if(currentValue >= 28.1 && currentValue <= 29) {
                 kLeukocytes = 4;
+            } else {
+                self.lastInputWasValid(false);
+                event.target.parentNode.classList.add('has-error');
             }
         }
         self.kLeukocytes(kLeukocytes);
+        calculateLii();
+        calculateGpi();
     };
 
     self.validateAndChooseKEsr = function(data, event) {
         var currentValue = event.target.value;
         var kEsr = 0;
         if(isNaN(currentValue)){
-
+            self.lastInputWasValid(false);
+            event.target.parentNode.classList.add('has-error');
         } else {
+            self.lastInputWasValid(true);
+            event.target.parentNode.classList.remove('has-error');
             if(currentValue < 5) {
                 kEsr = 0.9;
             } else if(currentValue >= 6 && currentValue <= 15) {
@@ -124,10 +138,31 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
                 kEsr = 2.5;
             } else if(currentValue > 61) {
                 kEsr = 2.7;
+            } else {
+                self.lastInputWasValid(false);
+                event.target.parentNode.classList.add('has-error');
             }
         }
         self.kEsr(kEsr);
+        calculateLii();
+        calculateGpi();
     };
+
+    var calculateLii = function() {
+        var result = (3*self.youngNeutrophils() + 2*self.stabNeutrophils()
+            + self.segmentedNeutrophils())/((self.monocytes() + self.lymphocytes())
+            *(self.eosinophils() + 1));
+        if(!isNaN(result) && result !== Infinity) {
+            self.lii(result);
+        }
+    };
+
+    var calculateGpi = function() {
+        var result = self.lii() * self.kEsr() * self.kLeukocytes();
+        if(!isNaN(result) && result !== Infinity){
+            self.gpi(result);
+        }
+    }
 }
 
 ko.applyBindings(new CalculatorModel(0,0,0,0,0,0,0,0));

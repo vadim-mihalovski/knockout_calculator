@@ -65,13 +65,25 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="esr">СОЭ:</label>
-                <input type="text" class="form-control" id="esr" 
+                <input type="text" class="form-control" id="esr"
                        data-bind="value: esr, valueUpdate: 'input', event: {keyup: validateAndChooseKEsr}"/>
             </div>
         </form>
 
-        <span data-bind="text: kLeukocytes"></span>
-        <span data-bind="text: kEsr"></span>
+        <table class="table table-striped">
+            <tr class="success">
+                <td>Коэффициент лейкоцитов</td>
+                <td>Коэффициент СОЭ</td>
+                <td>ЛИИ</td>
+                <td>ГПЧ</td>
+            </tr>
+            <tr class="info">
+                <td data-bind="text: kLeukocytes"></td>
+                <td data-bind="text: kEsr"></td>
+                <td data-bind="text: lii"></td>
+                <td data-bind="text: gpi"></td>
+            </tr>
+        </table>
 
     </div>
 
