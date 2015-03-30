@@ -20,6 +20,7 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
     var index = 0;
 
     self.validate = function(data, event) {
+        findErrorInput();
         var currentElement = event.target;
         if(isNaN(currentElement.value)) {
             index++;
@@ -31,10 +32,14 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
             event.target.parentNode.classList.remove('has-error');
             calculateLii();
             calculateGpi();
+            if(findErrorInput()){
+                self.lastInputWasValid(false);
+            }
         }
     };
 
     self.validateAndChooseKLeukocytes = function(data, event) {
+        findErrorInput();
         var currentValue = event.target.value;
         var kLeukocytes = 0;
         if(isNaN(currentValue)){
@@ -103,9 +108,13 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
         self.kLeukocytes(kLeukocytes);
         calculateLii();
         calculateGpi();
+        if(findErrorInput()){
+            self.lastInputWasValid(false);
+        }
     };
 
     self.validateAndChooseKEsr = function(data, event) {
+        findErrorInput();
         var currentValue = event.target.value;
         var kEsr = 0;
         if(isNaN(currentValue)){
@@ -146,6 +155,9 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
         self.kEsr(kEsr);
         calculateLii();
         calculateGpi();
+        if(findErrorInput()){
+            self.lastInputWasValid(false);
+        }
     };
 
     var calculateLii = function() {
@@ -162,7 +174,18 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
         if(!isNaN(result) && result !== Infinity){
             self.gpi(result);
         }
-    }
+    };
+
+    var findErrorInput = function() {
+        var list = document.getElementsByClassName('form-group');
+        var result = false;
+        for (var i = 0; i < list.length; i++) {
+            if(list[i].classList.contains('has-error')) {
+                result = true;
+            }
+        }
+        return result;
+    };
 }
 
 ko.applyBindings(new CalculatorModel(0,0,0,0,0,0,0,0));
