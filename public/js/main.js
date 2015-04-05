@@ -162,8 +162,8 @@ function CalculatorModel(leukocytes, youngNeutrophils, stabNeutrophils,
 
     var calculateLii = function() {
         var result = (3*self.youngNeutrophils() + 2*self.stabNeutrophils()
-            + self.segmentedNeutrophils())/((self.monocytes() + self.lymphocytes())
-            *(self.eosinophils() + 1));
+            + +self.segmentedNeutrophils())/((+self.monocytes() + +self.lymphocytes())
+            *(+self.eosinophils() + 1));
         if(!isNaN(result) && result !== Infinity) {
             self.lii(result);
         }
